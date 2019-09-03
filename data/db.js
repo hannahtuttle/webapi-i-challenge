@@ -8,6 +8,7 @@ module.exports = {
   insert,
   update,
   remove,
+  add,
 };
 
 function find() {
@@ -36,4 +37,10 @@ function remove(id) {
   return db('users')
     .where('id', Number(id))
     .del();
+}
+
+async function add(user) {
+  const [id] = await db('users').insert(user);
+
+  return findById(id);
 }
